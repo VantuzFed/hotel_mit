@@ -12,7 +12,7 @@ class Table(QWidget):
 
     def insert_in_table(self):
         cur = self.obj.cursor()
-        cur.execute('SELECT * FROM users')
+        cur.execute('SELECT * FROM rooms')
         data = cur.fetchall()
         field_names = [i[0] for i in cur.description]
         self.ui.table.setRowCount(len(data))

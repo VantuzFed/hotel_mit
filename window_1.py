@@ -25,7 +25,7 @@ class Register(QWidget):
                 QMessageBox.warning(self,'Сообщение', 'Такой пользователь уже существует')
         except:
             val = (self.username, self.log, self.passwd)
-            sql = 'INSERT INTO users (username, login, passwd) VALUES(%s,%s,%s)'
+            sql = 'INSERT INTO customers (username, login, passwd) VALUES(%s,%s,%s)'
             cur.execute(sql, val)
             self.obj.commit()
             QMessageBox.information(self, 'Сообщение', 'Пользователь успешно создан')
