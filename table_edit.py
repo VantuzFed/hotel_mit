@@ -4,7 +4,7 @@ from PyQt6 import uic
 class Table(QWidget):
     def __init__(self, main_w, obj):
         super(Table,self).__init__()
-        self.ui = uic.loadUi('table.ui',self)
+        self.ui = uic.loadUi('gui_files/table_list.ui',self)
         self.main_w = main_w
         self.obj = obj
         self.ui.but_cle.clicked.connect(self.table.clear)

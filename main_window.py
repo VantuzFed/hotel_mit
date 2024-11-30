@@ -3,4 +3,4 @@ from PyQt6 import uic
 class MainWindow(QMainWindow):
     def __init__(self):
         super(MainWindow,self).__init__()
-        self.ui = uic.loadUi('main.ui', self)
+        self.ui = uic.loadUi('gui_files/main.ui', self)

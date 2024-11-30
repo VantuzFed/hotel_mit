@@ -1,10 +1,10 @@
 from PyQt6.QtWidgets import QWidget, QMessageBox
 from PyQt6 import uic
 
-class Register(QWidget):
+class Register_client(QWidget):
     def __init__(self, main_w, db):
-        super(Register,self).__init__()
-        self.ui = uic.loadUi('reg.ui', self)
+        super(Register_client,self).__init__()
+        self.ui = uic.loadUi('gui_files/reg_client.ui', self)
         self.log = 0
         self.passwd = 0
         self.username = 0
