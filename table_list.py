@@ -4,6 +4,7 @@ from PyQt6 import uic
 class Table_ls(QWidget):
     def __init__(self, main_w, obj):
         super(Table_ls,self).__init__()
+        print("table list window создано")
         self.ui = uic.loadUi('gui_files/table_list.ui',self)
         self.main_w = main_w
         self.obj = obj
