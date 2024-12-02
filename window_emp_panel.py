@@ -21,7 +21,7 @@ class EmpPanel(QWidget):
         self.but_tab_sig.emit()
 
     def but_reg_cli_f(self):
-        self.but_tab_sig.emit()
+        self.but_reg_sig.emit()
 
     def but_book_f(self):
-        self.but_tab_sig.emit()
+        self.but_book_sig.emit()

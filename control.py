@@ -47,7 +47,7 @@ class Control:
         self.w_t_ls.but_back.clicked.connect(self.show_main)
         self.w_resep_panel.hide()
         self.w_t_ls.show()
-        self.w_t_ls.activateWindow()
+        # self.w_t_ls.activateWindow()
 
     def show_window_book(self):
         self.w_resep_panel.hide()
