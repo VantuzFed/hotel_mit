@@ -477,7 +477,7 @@
    </font>
   </property>
   <property name="windowTitle">
-   <string>Table</string>
+   <string>Редактироваиня номеров</string>
   </property>
   <property name="windowOpacity">
    <double>0.000000000000000</double>
@@ -556,7 +556,7 @@
     </size>
    </property>
    <property name="editTriggers">
-    <set>QAbstractItemView::NoEditTriggers</set>
+    <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
    </property>
   </widget>
   <widget class="QPushButton" name="but_back">

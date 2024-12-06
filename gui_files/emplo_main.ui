@@ -497,13 +497,13 @@
    </font>
   </property>
   <property name="windowTitle">
-   <string>Main Window</string>
+   <string>Меню Ресепшн</string>
   </property>
   <widget class="QPushButton" name="but_tab">
    <property name="geometry">
     <rect>
-     <x>334</x>
-     <y>394</y>
+     <x>358</x>
+     <y>344</y>
      <width>131</width>
      <height>31</height>
     </rect>
@@ -515,8 +515,8 @@
   <widget class="QPushButton" name="but_reg_cli">
    <property name="geometry">
     <rect>
-     <x>330</x>
-     <y>450</y>
+     <x>354</x>
+     <y>400</y>
      <width>141</width>
      <height>31</height>
     </rect>
@@ -545,20 +545,34 @@
 Ресепшн</string>
    </property>
    <property name="alignment">
-    <set>Qt::AlignCenter</set>
+    <set>Qt::AlignmentFlag::AlignCenter</set>
    </property>
   </widget>
   <widget class="QPushButton" name="but_book">
    <property name="geometry">
     <rect>
-     <x>325</x>
-     <y>500</y>
+     <x>349</x>
+     <y>450</y>
      <width>161</width>
      <height>31</height>
     </rect>
    </property>
    <property name="text">
     <string>Бронирование номера</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="but_book_edit">
+   <property name="geometry">
+    <rect>
+     <x>350</x>
+     <y>500</y>
+     <width>161</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Редактирование
+бронирования</string>
    </property>
   </widget>
  </widget>

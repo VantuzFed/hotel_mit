@@ -497,7 +497,7 @@
    </font>
   </property>
   <property name="windowTitle">
-   <string>Registration</string>
+   <string>Новая бронь</string>
   </property>
   <widget class="QPushButton" name="button">
    <property name="geometry">
@@ -545,7 +545,7 @@
 Номера</string>
    </property>
    <property name="alignment">
-    <set>Qt::AlignCenter</set>
+    <set>Qt::AlignmentFlag::AlignCenter</set>
    </property>
   </widget>
   <widget class="QLabel" name="label_6">
@@ -617,7 +617,7 @@
     <string>Дата конца брони:</string>
    </property>
   </widget>
-  <widget class="QComboBox" name="comboBox_2">
+  <widget class="QComboBox" name="client_box">
    <property name="geometry">
     <rect>
      <x>448</x>

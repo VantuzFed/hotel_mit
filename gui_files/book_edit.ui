@@ -497,7 +497,7 @@
    </font>
   </property>
   <property name="windowTitle">
-   <string>Registration</string>
+   <string>Редактироваиняе брони</string>
   </property>
   <widget class="QPushButton" name="button">
    <property name="geometry">
@@ -545,7 +545,7 @@
 Брони номера</string>
    </property>
    <property name="alignment">
-    <set>Qt::AlignCenter</set>
+    <set>Qt::AlignmentFlag::AlignCenter</set>
    </property>
   </widget>
   <widget class="QLabel" name="label_6">
@@ -617,7 +617,7 @@
     <string>Дата конца брони:</string>
    </property>
   </widget>
-  <widget class="QComboBox" name="comboBox_2">
+  <widget class="QComboBox" name="client_box">
    <property name="geometry">
     <rect>
      <x>498</x>
@@ -653,7 +653,7 @@
     <string>Итоговая цена: </string>
    </property>
   </widget>
-  <widget class="QPushButton" name="button_reg_2">
+  <widget class="QPushButton" name="button_rm">
    <property name="geometry">
     <rect>
      <x>420</x>
@@ -666,7 +666,7 @@
     <string>Удалить</string>
    </property>
   </widget>
-  <widget class="QComboBox" name="comboBox_3">
+  <widget class="QComboBox" name="book_box">
    <property name="geometry">
     <rect>
      <x>218</x>
