@@ -11,7 +11,12 @@ from windows_room_edit import WindowRoomEdit
 from windows_emp_edit import WindowEmpEdt
 from windows_book_edit import WindowBookEdit
 import sys
-from sql import Con_base
+from sqlalchemy import  create_engine, or_, and_, func
+from sqlalchemy.orm import sessionmaker
+from models import *
+
+engine = create_engine("mysql+pymysql://root:35678@127.0.0.1/hotel")
+Session = sessionmaker(bind=engine)
 
 class Control:
     def __init__(self, w, bd_obj):
@@ -104,6 +109,6 @@ if __name__ == '__main__':
     app = QApplication(sys.argv)
     w = MainWindow()
     w.show()
-    bd_obj = Con_base().connection()
+    bd_obj = Session()
     c = Control(w, bd_obj)
     sys.exit(app.exec())
