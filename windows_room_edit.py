@@ -1,5 +1,6 @@
 from PyQt6.QtWidgets import QWidget, QTableWidgetItem
 from PyQt6 import uic
+from sqlalchemy import or_, and_, func
 
 class WindowRoomEdit(QWidget):
     def __init__(self, main_w, db):

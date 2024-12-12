@@ -1,5 +1,6 @@
 from PyQt6.QtWidgets import QWidget, QMessageBox
 from PyQt6 import uic
+from sqlalchemy import or_, and_, func
 
 class WindowRegisterEmp(QWidget):
     def __init__(self, main_w, db):

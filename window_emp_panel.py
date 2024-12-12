@@ -1,6 +1,7 @@
 from PyQt6.QtWidgets import QWidget
 from PyQt6 import uic
 from PyQt6.QtCore import pyqtSignal
+from sqlalchemy import or_, and_, func
 
 class EmpPanel(QWidget):
     but_tab_sig = pyqtSignal()

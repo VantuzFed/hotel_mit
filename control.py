@@ -11,7 +11,7 @@ from windows_room_edit import WindowRoomEdit
 from windows_emp_edit import WindowEmpEdt
 from windows_book_edit import WindowBookEdit
 import sys
-from sqlalchemy import  create_engine, or_, and_, func
+from sqlalchemy import  create_engine
 from sqlalchemy.orm import sessionmaker
 from models import *
 
