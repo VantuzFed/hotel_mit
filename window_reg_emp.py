@@ -1,11 +1,16 @@
-from PyQt6.QtWidgets import QWidget, QMessageBox
-from PyQt6 import uic
+from PySide6.QtWidgets import QWidget, QMessageBox
+from PySide6.QtUiTools import QUiLoader
+from PySide6.QtCore import QFile
 from sqlalchemy import or_, and_, func
 
 class WindowRegisterEmp(QWidget):
     def __init__(self, main_w, db):
         super(WindowRegisterEmp,self).__init__()
-        self.ui = uic.loadUi('gui_files/reg_emp.ui', self)
+        loader = QUiLoader()
+        ui_file = QFile('gui_files/reg_emp.ui')
+        ui_file.open(QFile.ReadOnly)
+        self.ui = loader.load(ui_file, self)
+        ui_file.close()
         self.fname = 0
         self.mname = 0
         self.lname = 0

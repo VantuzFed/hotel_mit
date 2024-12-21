@@ -1,16 +1,21 @@
-from PyQt6.QtWidgets import QWidget
-from PyQt6 import uic
-from PyQt6.QtCore import pyqtSignal
+from PySide6.QtWidgets import QWidget
+from PySide6.QtUiTools import QUiLoader
+from PySide6.QtCore import QFile
+from PySide6.QtCore import Signal
 from sqlalchemy import or_, and_, func
 
 class EmpPanel(QWidget):
-    but_tab_sig = pyqtSignal()
-    but_reg_sig = pyqtSignal()
-    but_book_sig = pyqtSignal()
-    but_book_edit_sig = pyqtSignal()
+    but_tab_sig = Signal()
+    but_reg_sig = Signal()
+    but_book_sig = Signal()
+    but_book_edit_sig = Signal()
     def __init__(self, main_w, db):
         super(EmpPanel,self).__init__()
-        self.ui = uic.loadUi('gui_files/emplo_main.ui',self)
+        loader = QUiLoader()
+        ui_file = QFile('gui_files/emplo_main.ui')
+        ui_file.open(QFile.ReadOnly)
+        self.ui = loader.load(ui_file, self)
+        ui_file.close()
         self.main_w = main_w
         self.obj = db
         self.ui.but_tab.clicked.connect(self.but_tab_f)

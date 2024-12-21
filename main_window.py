@@ -1,6 +1,8 @@
-from PyQt6.QtWidgets import QMainWindow
-from PyQt6 import uic
+from PySide6.QtWidgets import QMainWindow, QPushButton
+from gui_files.ui_main import Ui_Form
+
 class MainWindow(QMainWindow):
     def __init__(self):
         super(MainWindow,self).__init__()
-        self.ui = uic.loadUi('gui_files/main.ui', self)
+        self.ui = Ui_Form()
+        self.ui.setupUi(self)

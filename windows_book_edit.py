@@ -1,10 +1,15 @@
-from PyQt6.QtWidgets import QWidget, QMessageBox
-from PyQt6 import uic
+from PySide6.QtWidgets import QWidget, QMessageBox
+from PySide6.QtUiTools import QUiLoader
+from PySide6.QtCore import QFile
 
 class WindowBookEdit(QWidget):
     def __init__(self, main_w, db):
         super(WindowBookEdit,self).__init__()
-        self.ui = uic.loadUi('gui_files/book_edit.ui', self)
+        loader = QUiLoader()
+        ui_file = QFile('gui_files/book_edit.ui')
+        ui_file.open(QFile.ReadOnly)
+        self.ui = loader.load(ui_file, self)
+        ui_file.close()
         self.log = 0
         self.passwd = 0
         self.username = 0

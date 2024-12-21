@@ -1,8 +1,8 @@
-from PyQt6.QtWidgets import QApplication
+from PySide6.QtWidgets import QApplication
+from main_window import MainWindow
 from window_reg_client import Register_client
 from window_auth import Login
 from table_list import Table_ls
-from main_window import MainWindow
 from window_emp_panel import EmpPanel
 from window_mgr_panel import MgrPanel
 from window_book import WindowBook
@@ -11,7 +11,7 @@ from windows_room_edit import WindowRoomEdit
 from windows_emp_edit import WindowEmpEdt
 from windows_book_edit import WindowBookEdit
 import sys
-from sqlalchemy import  create_engine
+from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from models import *
 
@@ -21,10 +21,10 @@ Session = sessionmaker(bind=engine)
 class Control:
     def __init__(self, w, bd_obj):
         self.bd_obj = bd_obj
+        self.mw = w
         self.w_reg_cli = Register_client(w, self.bd_obj)
         self.w_log = Login(w, self.bd_obj)
         self.w_t_ls = Table_ls(w, self.bd_obj)
-        self.mw = w
         self.w_book = WindowBook(w, self.bd_obj,self.w_log.get_emp_id())
         self.w_book_edt = WindowBookEdit(w, self.bd_obj)
         self.w_resep_panel = EmpPanel(w, self.bd_obj)
@@ -32,7 +32,8 @@ class Control:
         self.w_room_edt = WindowRoomEdit(w, self.bd_obj)
         self.w_reg_emp = WindowRegisterEmp(w, self.bd_obj)
         self.w_emp_edt = WindowEmpEdt(w, self.bd_obj)
-        self.mw.button_auth.clicked.connect(self.show_window_auth)
+
+        self.mw.ui.button_auth.clicked.connect(self.show_window_auth)
         self.w_log.branch_signal.connect(self.handle_emp_branch)
         self.w_resep_panel.but_tab_sig.connect(self.show_table_list)
         self.w_resep_panel.but_reg_sig.connect(self.show_window_reg_client)
@@ -52,7 +53,7 @@ class Control:
     # login
     def show_window_auth(self):
         self.mw.hide()
-        self.w_log.button.clicked.connect(self.show_main)
+        self.w_log.ui.button.clicked.connect(self.show_main)
         self.w_log.show()
 
     def show_main(self):
