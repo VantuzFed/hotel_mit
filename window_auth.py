@@ -1,39 +1,31 @@
 from PySide6.QtWidgets import QWidget, QMessageBox
-from PySide6.QtUiTools import QUiLoader
-from PySide6.QtCore import QFile
-from PySide6.QtCore import Signal
+from PySide6.QtCore import Signal, Slot
 from gui_files.ui_log import Ui_Form
+from sqlalchemy import and_
+from models import *
 
 class Login(QWidget):
     branch_signal = Signal(str)
+    dataSent = Signal(int)
     def __init__(self, main_w, db):
         super(Login,self).__init__()
         self.ui = Ui_Form()
         self.ui.setupUi(self)
         self.log = 0
-        self.emp_id = 0
         self.passwd = 0
         self.main_w = main_w
         self.obj = db
-        # self.ui.button_log.clicked.connect(self.login)
-    def get_emp_id(self):
-        return self.emp_id
-    # def login(self):
-    #     self.log = self.ui.ent_login.text()
-    #     self.passwd = self.ui.ent_passwd.text()
-    #     # cur = self.obj.cursor(buffered=True)
-    #     # cur.execute('select * from employees where login = \'{}\' and password_ = \'{}\''.format(self.log, self.passwd))
-    #     # res = cur.fetchone()
-    #     # try:
-    #     #     if res[1] == self.log and res[4] == self.passwd:
-    #     #         cur.execute(f'select * from employees where login = \'{self.log}\'')
-    #     #         res = cur.fetchone()
-    #     #         self.emp_id = res[0]
-    #     #         cur.execute(f'select * from job_history where emp_id = \'{self.emp_id}\'')
-    #     #         res = cur.fetchone()
-    #     #         occu = res[2]
-    #     #         QMessageBox.information(self, 'Сообщение', f'Авторизация прошла успешно, {occu}')
-    #     #         self.branch_signal.emit(occu)
-    #     # except:
-    #     #     QMessageBox.warning(self,'Предупреждение', 'Неверное имя пользователя или пароль')
-    #     # cur.close()
+        self.ui.button_log.clicked.connect(self.login)
+
+
+    def login(self):
+        self.log = self.ui.ent_login.text()
+        self.passwd = self.ui.ent_passwd.text()
+        user = self.obj.query(Employees.id, Employees.login, Employees.password_, JobHistory.occupation).join(JobHistory).filter(and_(Employees.login == self.log, Employees.password_ == self.passwd)).first()
+        if user:
+            if user.login == self.log or user.password_ == self.passwd:
+                QMessageBox.information(self, 'Сообщение', f'Авторизация прошла успешно, {user.occupation}')
+                self.branch_signal.emit(user.occupation)
+                self.dataSent.emit(user.id)
+        else:
+            QMessageBox.warning(self,'Предупреждение', 'Неверное имя пользователя или пароль')

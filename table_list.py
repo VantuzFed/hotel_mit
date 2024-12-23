@@ -1,16 +1,12 @@
 from PySide6.QtWidgets import QWidget, QTableWidgetItem
-from PySide6.QtUiTools import QUiLoader
-from PySide6.QtCore import QFile
+from gui_files.ui_table_list import Ui_Form
 from sqlalchemy import or_, and_, func
 
 class Table_ls(QWidget):
     def __init__(self, main_w, obj):
         super(Table_ls,self).__init__()
-        loader = QUiLoader()
-        ui_file = QFile('gui_files/table_list.ui')
-        ui_file.open(QFile.ReadOnly)
-        self.ui = loader.load(ui_file, self)
-        ui_file.close()
+        self.ui = Ui_Form()
+        self.ui.setupUi(self)
         self.main_w = main_w
         # self.obj = obj
         # cur = self.obj.cursor()

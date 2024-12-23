@@ -1,16 +1,12 @@
 from PySide6.QtWidgets import QWidget, QMessageBox
-from PySide6.QtUiTools import QUiLoader
-from PySide6.QtCore import QFile
+from gui_files.ui_emp_edit import Ui_Form
 from sqlalchemy import or_, and_, func
 
 class WindowEmpEdt(QWidget):
     def __init__(self, main_w, db):
         super(WindowEmpEdt,self).__init__()
-        loader = QUiLoader()
-        ui_file = QFile('gui_files/emp_edit.ui')
-        ui_file.open(QFile.ReadOnly)
-        self.ui = loader.load(ui_file, self)
-        ui_file.close()
+        self.ui = Ui_Form()
+        self.ui.setupUi(self)
         self.log = 0
         self.passwd = 0
         self.username = 0

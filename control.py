@@ -13,10 +13,25 @@ from windows_book_edit import WindowBookEdit
 import sys
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from models import *
+
 
 engine = create_engine("mysql+pymysql://root:35678@127.0.0.1/hotel")
 Session = sessionmaker(bind=engine)
+
+class UserData:
+    _instance = None
+
+    def __new__(cls):
+        if cls._instance is None:
+            cls._instance = super(UserData, cls).__new__(cls)
+            cls._instance.user_id = None  # Изначально id не задан
+        return cls._instance
+
+    def set_user_id(self, user_id):
+        self.user_id = user_id
+
+    def get_user_id(self):
+        return self.user_id
 
 class Control:
     def __init__(self, w, bd_obj):
@@ -25,7 +40,7 @@ class Control:
         self.w_reg_cli = Register_client(w, self.bd_obj)
         self.w_log = Login(w, self.bd_obj)
         self.w_t_ls = Table_ls(w, self.bd_obj)
-        self.w_book = WindowBook(w, self.bd_obj,self.w_log.get_emp_id())
+        self.w_book = WindowBook(w, self.bd_obj)
         self.w_book_edt = WindowBookEdit(w, self.bd_obj)
         self.w_resep_panel = EmpPanel(w, self.bd_obj)
         self.w_mgr_panel = MgrPanel(w, self.bd_obj)
@@ -34,6 +49,7 @@ class Control:
         self.w_emp_edt = WindowEmpEdt(w, self.bd_obj)
 
         self.mw.ui.button_auth.clicked.connect(self.show_window_auth)
+
         self.w_log.branch_signal.connect(self.handle_emp_branch)
         self.w_resep_panel.but_tab_sig.connect(self.show_table_list)
         self.w_resep_panel.but_reg_sig.connect(self.show_window_reg_client)
@@ -42,11 +58,21 @@ class Control:
         self.w_mgr_panel.but_edt_rm_sig.connect(self.show_window_edit_room)
         self.w_mgr_panel.but_reg_emp_sig.connect(self.show_window_reg_emp)
         self.w_mgr_panel.but_edt_emp_sig.connect(self.show_window_edit_emp)
+        self.w_log.dataSent.connect(self.handle_authentication)
+
+    def handle_authentication(self, user_id):
+        # Сохраняем id пользователя в синглтон
+        user_data = UserData()
+        user_data.set_user_id(user_id)
+
+        # Теперь передаем id в другие окна, если нужно
+        self.w_book.set_user_id(user_data.get_user_id())
+
 
 
     # registration
     def show_window_reg_client(self):
-        self.w_reg_cli.button.clicked.connect(self.show_main)
+        self.w_reg_cli.ui.button.clicked.connect(self.show_main)
         self.w_resep_panel.hide()
         self.w_reg_cli.show()
 
@@ -68,31 +94,31 @@ class Control:
         self.mw.show()
 
     def show_table_list(self):
-        self.w_t_ls.but_back.clicked.connect(self.show_main)
+        self.w_t_ls.ui.button.clicked.connect(self.show_main)
         self.w_resep_panel.hide()
         self.w_t_ls.show()
 
     def show_window_book(self):
-        self.w_book.button.clicked.connect(self.show_main)
+        self.w_book.ui.button.clicked.connect(self.show_main)
         self.w_resep_panel.hide()
         self.w_book.show()
 
     def show_window_book_edit(self):
-        self.w_book_edt.button.clicked.connect(self.show_main)
+        self.w_book_edt.ui.button.clicked.connect(self.show_main)
         self.w_resep_panel.hide()
         self.w_book_edt.show()
     def show_window_edit_room(self):
-        self.w_room_edt.but_back.clicked.connect(self.show_main)
+        self.w_room_edt.ui.button.clicked.connect(self.show_main)
         self.w_mgr_panel.hide()
         self.w_room_edt.show()
 
     def show_window_reg_emp(self):
-        self.w_reg_emp.button.clicked.connect(self.show_main)
+        self.w_reg_emp.ui.button.clicked.connect(self.show_main)
         self.w_mgr_panel.hide()
         self.w_reg_emp.show()
 
     def show_window_edit_emp(self):
-        self.w_emp_edt.button.clicked.connect(self.show_main)
+        self.w_emp_edt.ui.button.clicked.connect(self.show_main)
         self.w_mgr_panel.hide()
         self.w_emp_edt.show()
 

@@ -1,16 +1,12 @@
 from PySide6.QtWidgets import QWidget, QTableWidgetItem
-from PySide6.QtUiTools import QUiLoader
-from PySide6.QtCore import QFile
+from gui_files.ui_table_edit import Ui_Widget
 from sqlalchemy import or_, and_, func
 
 class WindowRoomEdit(QWidget):
     def __init__(self, main_w, db):
         super(WindowRoomEdit,self).__init__()
-        loader = QUiLoader()
-        ui_file = QFile('gui_files/table_edit.ui')
-        ui_file.open(QFile.ReadOnly)
-        self.ui = loader.load(ui_file, self)
-        ui_file.close()
+        self.ui = Ui_Widget()
+        self.ui.setupUi(self)
         self.log = 0
         self.passwd = 0
         self.username = 0
